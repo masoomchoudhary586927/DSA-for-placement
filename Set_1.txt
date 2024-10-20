@@ -1,0 +1,517 @@
+Find negative number in array in c++
+
+
+int main() {
+    int n=5;
+    int arr[n]={1,2,3,-1,-2};
+
+    int count = 0; 
+    for(int i = 0; i<=n; i++) {
+        if(arr[i] < 0) {
+            count++;
+        }
+    }
+
+    cout << "Negative numbers in the array is : " << count << endl;
+
+    return 0;
+}
+
+
+
+--------------------------------------------------------------------------------------------------------
+
+
+Show index no. Or array with user input in c++
+
+
+#include <iostream>
+using namespace std;
+int main() {
+    int il;
+     int arr[5]={1,2,3,3,1};
+     cout<<"Enter value ";
+     cin>>il;
+     
+for(int i = 0; i < 5; i++) {    
+        if(il==arr[i]){
+            cout<<"Index no. is";
+            cout<<i;
+        }
+    }    
+     
+     
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------
+
+
+Max find in array in c++
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n=5;
+    int arr[n];
+    cout<<"Enter the value of arry: ";
+    for(int i=0;i<=n;i++){
+        cin>>arr[i];
+    }
+    int max=0;
+    for(int i=0;i<=n;i++){
+        if(arr[i]>max){
+            max=arr[i];
+        }
+    }
+    cout<<"max value is:"<<max;
+    
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------
+
+
+
+Add 2 shorted array in 3 array
+
+
+#include <iostream>
+using namespace std;
+int main() { 
+    int n=5;
+    int arr[n]={1,2,3,4,5};
+    int arr1[n]={1,2,3,4,5};
+    
+
+
+int arr3[n];
+for(int i=0;i<=n;i++){
+    arr3[i]=arr[i]+arr1[i];
+}
+
+for(int i=0;i<=n;i++){
+    cout<<arr3[i];
+}
+
+
+return 0;
+}
+
+---------------------------------------------------------------------------------------------------------
+
+Find duplicate no. In array in c++
+
+#include <iostream>
+using namespace std;
+int main() {
+     int arr[5]={1,2,3,3,1};
+     
+for(int i = 0; i < 5; i++) {    
+        for(int j = i + 1; j < 5; j++) {    
+            if(arr[i] == arr[j])    
+                cout<<arr[j];    
+        }    
+    }    
+     
+     
+    return 0;
+}
+
+
+----------------------------------------------------------------------------------------------------------
+
+Star pattern in c
+
+*
+
+**
+
+***
+
+****
+
+*****
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n=5;
+    for(int I=1;I<=n;I++){
+        for(int j=1;j<=I;j++){
+            printf("*");
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+---------------------------------------------------------------------------------------------------------------
+
+Star pattern in c
+
+
+*****
+
+****
+
+***
+
+**
+
+*
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n=5;
+    for(int I=1;I<=n;I++){
+        for(int j=1;j<=n-I+1;j++){
+            printf("*");
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+Star pattern in c
+
+*
+**
+***
+****
+*****
+*****
+****
+***
+**
+*
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n=5;
+   for(int I=1;I<=n;I++){
+        for(int j=1;j<=I;j++){
+            printf("*");
+        }
+        printf("\n");
+    }
+
+    
+    for(int I=1;I<=n;I++){
+        for(int j=1;j<=n-I+1;j++){
+            printf("*");
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+Star pattern in c
+
+        * 
+      * * * 
+    * * * * * 
+  * * * * * * * 
+* * * * * * * * * 
+  * * * * * * * 
+    * * * * * 
+      * * * 
+        * 
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n=5;
+
+    for(int i = 1; i <= n; i++) {
+        for(int j = i; j < n; j++) {
+            printf("  ");
+        }
+        for(int k = 1; k <= (2*i - 1); k++) {
+            printf("* ");
+        }
+        printf("\n");
+    }
+    
+  for(int i = 1; i <= n; i++) {
+       for(int j = i; j < i*2; j++) {
+            printf("  ");
+        }
+        for(int k = 1; k <= n+4-(i*2); k++) {
+            printf("* ");
+        }
+         
+        printf("\n");
+}
+
+
+    return 0;
+}
+
+
+---------------------------------------------------------------------------------------------------------------
+
+Star pattern in c
+
+    *****
+   *****
+  *****
+ *****
+*****
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int n=5;
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=n-i;j++){
+            printf(" ");
+        }
+        for(int k=1;k<=n;k++){
+            printf("*");
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+No. Pattern in c
+
+12345
+23455
+34555
+45555
+
+
+#include <iostream>
+using namespace std;
+int main() { 
+    int n=4;
+    int arr[n];
+    
+for(int i=1;i<=n;i++){
+    for(int j=i;j<=n;j++){
+        printf("%d", j) 
+    }
+    for(int k=1;k<=i;k++){
+       printf("5");
+    }
+    cout<<"\n";
+}
+
+
+
+return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+Make no. Pattern in c
+
+12345
+54321
+12345
+54321
+
+
+
+
+#include <iostream>
+using namespace std;
+int main() { 
+    int n=5;
+    int arr[n];
+    
+for(int i=1;i<=n;i++){
+    for(int j=1;j<=n;j++){
+        printf("%d",j);
+    } 
+ cout<<"\n";
+   for(int j=1;j<=n;j++){
+        printf("%d",n-j+1);
+    }
+  printf("\n");
+}
+
+
+
+return 0;
+}
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+Take 7 input from user and reverser the no. And insert in array
+
+
+#include <iostream>
+using namespace std;
+int main() { 
+    int n=7;
+     int arr[n];
+     int arr1[n];
+     
+for(int i = 1; i <= n; i++) {    
+        cout<<"Enter value ";
+     cin>>arr[i];
+    }  
+   
+for(int i = 0; i <= n; i++) {    
+       arr1[i]=arr[n-i];
+       cout<<arr1[i];
+           }  
+     
+    return 0;
+}
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+Merge 2 array in 3 array in c++
+
+
+
+#include <iostream>
+using namespace std;
+
+
+int main() { 
+    int ar[5]={1,3,5,7,9};
+    int arr[5]={2,4,6,8,10};
+    int arr2[9];
+    int i=0;
+    int j=0;
+    for(int n=0;n<=10;n++){
+        if(i<5 && j<5){
+            if(ar[i]<arr[j]){
+                arr2[n]=ar[i];
+                i++;
+            }
+            else{
+                arr2[n]=arr[j];
+                j++;
+            }
+        }
+        else if(i<5){
+            arr2[n]=ar[i];
+          
+        }else if(j<5){
+            arr2[n]=arr[j];
+            j++;
+        }
+        }
+    
+for(int s=0;s<=9;s++){
+    cout<<arr2[s];
+    cout<<"\n";
+}   
+}
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+Majority element in array
+
+
+
+
+// Online C compiler to run C program online
+#include <stdio.h>
+
+int majority (int arr1[]) 
+{
+	int n=9;
+	int n2=n/2;
+	for(int i=0;i<=n;i++){
+		int count=0;
+		for(int j=0;j<=n;j++){
+			if(arr1[i]==arr1[j]){
+				count++;
+			}
+		}
+		if(count>=n2){
+			printf("Majority element is %d",arr1[i]);
+			break;
+		}
+	}
+	return 0;
+}
+
+
+
+int main()
+{
+		int n=9;
+  int arr[n];
+  for(int i=0;i<=n;i++){
+      printf("Enter the element:");
+      scanf("%d\n",&arr[i]);
+  }
+    majority(arr);
+	return 0;
+}
+
+------------------------------------------------------------------------------------------------------------------
+
+
+Unique no. In array
+
+
+#include<iostream>
+using namespace std;
+int unique(int arr[],int n,int i){
+		for(int j=0;j<n;j++){
+		    if(i==j&&i<n){
+		        j=j+1;
+		    }
+			if(arr[i]==arr[j]){
+				return false;
+			}
+		}
+		return true;
+}
+int main(){
+	int arr[10]={5,4,5,6,2,1,3,3,6,9};
+	for(int i=0;i<10;i++){
+	if(unique(arr,10,i)){
+		cout<<arr[i];
+	}
+	}
+	return 0;
+}
