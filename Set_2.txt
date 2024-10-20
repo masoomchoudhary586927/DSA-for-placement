@@ -1,0 +1,337 @@
+set 2 quest-1
+max subarray
+
+
+#include <stdio.h>
+
+int maxSubArray(int* nums, int numsSize) {
+    int maxSum = 0; 
+    int currentSum = 0;   
+
+    for (int i = 0; i < numsSize; i++) {
+        currentSum += nums[i];        
+
+        if (currentSum > maxSum) {    
+            maxSum = currentSum;
+        }
+
+        if (currentSum < 0) {          
+            currentSum = 0;
+        }
+    }
+    return maxSum; 
+}
+
+int main() {
+    int nums[] = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+    int numsSize = sizeof(nums) / sizeof(nums[0]);
+    
+    int result = maxSubArray(nums, numsSize);
+    printf("The largest sum of a subarray is: %d\n", result);
+    
+    return 0;
+}
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+Set 2 quest=2
+Inversion no. In array
+
+
+
+#include <iostream>
+using namespace std;
+int main() {
+   int arr[4]={7,2,6,3};
+   int c1=0;
+   for(int i=0;i<=4;i++){
+       for(int j=i+1;j<=4;j++){
+       if(arr[i]>arr[j]){
+           c1=c1+1;
+       }
+           
+       }
+   }
+   cout<<c1;
+    return 0;
+}
+
+
+-------------------------------------------------------------------------------------------------------
+
+
+Set-2 quest-3
+N largest no. In array
+
+
+#include <iostream>
+using namespace std;
+int main() {
+   int n=6;
+   int arr[n]={3,2,1,5,6,4};
+   int max=0;
+   int max2=0;
+   for(int i=0;i<=n-1;i++){
+       if(arr[i]>max){
+           max=arr[i];
+       }
+   }
+   cout<<"Largest array is:"<<max<<"\n";
+for(int i=0;i<=n-1;i++){
+       if(arr[i]!=max){
+           if(arr[i]>max2){
+               max2=arr[i];
+           }
+       }
+   }
+   cout<<"second largest array is:"<<max2;
+
+    return 0;
+}
+
+---------------------------------------------------------------------------------------------------------------
+
+Ste-2 quest-4
+Palindrome find in string
+
+
+#include <stdio.h>
+#include <string.h>
+int main() {
+char str[100];
+    printf("Enter string :");
+    gets(str);
+    int len=strlen(str);
+    int co=len/2;
+    int count=0;
+    for(int i=0;i<=len;i++){
+        if(str[i]==str[len-i-1]){
+            count++;
+        }
+        
+    }
+    
+    if(count>=co){
+        printf("String is palendrom");
+        
+    }else{
+        printf("It is not palindrome");
+    }
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+Set-2 quest-6
+X=9 
+Find pair sum is equal to x in array
+
+
+#include <stdio.h>
+
+int main() {
+    int n;
+    printf("Enter the size of N:");
+    scanf("%d",&n);
+    int arr[n];
+    
+    for(int i=0;i<=n-1;i++){
+       
+        printf("Enter the value of array");
+        scanf("%d",&arr[i]);
+    }
+    
+    int x;
+    printf("Enter the value of x:");
+    scanf("%d",&x);
+    
+    for(int i=0;i<=n-1;i++){
+        for(int j=1;j<=n;j++){
+            int stor=arr[i]+arr[j];
+            if(stor==x){
+                printf("yes have");
+              printf("The pair of x value is %d %d \n",arr[i],arr[j]);
+            }
+        }
+    }
+    return 0;
+}
+
+----------------------------------------------------------------------------------------------------------------
+
+Heap sort to find max element
+
+
+#include <stdio.h>
+
+int * heapify(int num[],int temp[])
+{
+    for(int i=0;i<5;i++)
+    {
+        if(i==0)
+        {
+            temp[i]=num[i];
+        }
+        else{
+        int k = i;
+        temp[i] = num[i];
+        int j = (i-1)/2;
+        while(temp[j]<temp[k])
+        {
+            temp[j] = temp[j]^temp[k];
+            temp[k] = temp[j]^temp[k];
+            temp[j] = temp[j]^temp[k];
+            k = j;
+            j = (k-1)/2;
+        }
+        }
+    }
+    
+    return temp;
+}
+
+void display(int *temp)
+{
+    for(int i=0;i<5;i++)
+    {
+        printf("%d ",*temp);
+        temp++;
+    }
+}
+
+void main() 
+{
+    int num[5],temp[5];
+    
+    printf("Enter Elements\n");
+    for(int i=0;i<5;i++)
+    {     
+        printf("Enter Element %d:- ",i+1);
+        scanf("%d",&num[i]);
+    }
+    
+    int *p = heapify(num,temp);
+    
+    display(p);
+        
+    printf("\n");
+    display(num);
+}
+
+
+--------------------------------------------------------------------------------------------------------------
+
+
+nth largest element in heap sort
+
+
+#include <stdio.h>
+
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+
+void heapify(int arr[], int size, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < size && arr[left] > arr[largest]) {
+        largest = left;
+    }
+    if (right < size && arr[right] > arr[largest]) {
+        largest = right;
+    }
+
+    if (largest != i) {
+        swap(&arr[i], &arr[largest]);
+        heapify(arr, size, largest);
+    }
+}
+
+void buildHeap(int num[], int temp[], int size) {
+    for (int i = 0; i < size; i++) {
+        temp[i] = num[i];
+        int k = i;
+        while (k > 0) {
+            int j = (k - 1) / 2;
+            if (temp[j] < temp[k]) 
+            {
+                swap(&temp[j], &temp[k]);
+                k = j;
+            }
+            else {
+                break;
+            }
+        }
+    }
+}
+
+
+
+int deletion(int arr[], int* size) {
+    if (*size <= 0) return -1; 
+
+    int maxElement = arr[0];
+   arr[0] = arr[*size - 1];
+    (*size)--;
+
+    heapify(arr, *size, 0);
+
+    return maxElement;
+}
+
+
+void display(int *arr, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int num[10], temp[10], deleted[10];
+    int size = 10;
+
+    printf("Enter 10 Elements:\n");
+    for (int i = 0; i < size; i++) {
+        printf("Enter Element %d: ", i + 1);
+        scanf("%d", &num[i]);
+    }
+
+    buildHeap(num, temp, size);
+    printf("\nOriginal array: ");
+    display(num, size);
+
+
+    printf("\nHeap: ");
+    display(temp, size);
+    
+    for (int i = 0; i < 10; i++) {
+        deleted[i] = deletion(temp, &size);
+    }
+
+    printf("\nDeleted elements: ");
+    display(deleted, 10);
+
+    int k;
+    printf("\n\nTo get the k'th element\n");
+    printf("enter the value of k :- ");
+    scanf("%d",&k);
+         if(k<size-1)
+         printf("\n\nvalue of k is out of index ");
+        
+         else
+         {
+           printf("\n\nthe Kth largest element is :-  %d",deleted[k-1]);
+         }
+        return 0;
+    }
+
+
