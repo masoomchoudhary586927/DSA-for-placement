@@ -1,0 +1,676 @@
+                     -------------------------------  Set-3  ------------------------------------
+
+
+Set-3 quest-1
+Count square free and divisors
+
+
+#include <stdio.h>
+#include <math.h>
+
+int SquareFree(int num) {
+    for (int i = 2; i * i <= num; i++) {
+        if (num % (i * i) == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int countSquareFree(int N) {
+    int count = 0;
+    
+    for (int i = 1; i <= sqrt(N); i++) {
+        if (N % i == 0) {
+
+            if (i != 1 && SquareFree(i)) {
+                count++;
+            }
+
+            if (i != N / i && SquareFree(N / i)) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+int main() {
+    int N;
+    printf("Enter the value:");
+    scanf("%d", &N);
+    
+    printf("%d\n", countSquareFree(N));
+    
+    return 0;
+}
+
+
+
+---------------------------------------------------------------------------------------------------------------
+
+
+
+Set-3 quest-2
+
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_VALUES 64
+
+bool contains(long long arr[], int size, long long value) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == value) {
+            return true;
+        }
+    }
+    return false;
+}
+
+long long findDistinctOr(long long arr[], int n) {
+    long long current[MAX_VALUES], next[MAX_VALUES];
+    int currentSize = 0, nextSize = 0;
+    long long result[MAX_VALUES];
+    int resultSize = 0;
+
+    for (int i = 0; i < n; i++) {
+        nextSize = 0;
+        for (int j = 0; j < currentSize; j++) {
+            long long orValue = current[j] | arr[i];
+            if (!contains(next, nextSize, orValue)) {
+                next[nextSize++] = orValue;
+            }
+        }
+        if (!contains(next, nextSize, arr[i])) {
+            next[nextSize++] = arr[i];
+        }
+        for (int k = 0; k < nextSize; k++) {
+            if (!contains(result, resultSize, next[k])) {
+                result[resultSize++] = next[k];
+            }
+        }
+        currentSize = nextSize;
+        for (int k = 0; k < nextSize; k++) {
+            current[k] = next[k];
+        }
+    }
+
+    long long finalResult = 0;
+    for (int i = 0; i < resultSize; i++) {
+        finalResult |= result[i];
+    }
+    return finalResult;
+}
+
+int main() {
+    int n;
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    long long arr[n];
+    printf("Enter the elements of the array: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%lld", &arr[i]);
+    }
+
+    long long result = findDistinctOr(arr, n);
+    printf("Result: %lld\n", result);
+
+    return 0;
+}
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+
+Set-3 Q-3
+
+#include <stdio.h>
+
+void slidingWindow(int arr[],int temp,int n){
+      int k;
+   printf("Enter the value of k:");
+   scanf("%d",&k);
+   for(int j=0;j<=n-1;j++){
+       temp=arr[j];
+       if(k+j>n){
+           break;
+       }
+      for(int s=j;s<=k-1+j;s++){
+          if(s>=n){
+              break;
+          }
+          if(temp<arr[s]){
+              temp=arr[s];
+          }
+      }
+      printf("%d",temp);
+      printf("\n");
+    
+   }
+}
+
+int main() {
+    int n=10;
+   int temp;
+   int arr[n];
+   for(int I=0;I<=n-1;I++){
+       printf("Enter the value of array:");
+       scanf("%d",&arr[I]);
+   }
+   slidingWindow(arr,temp,n);
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Set-3 quest-4
+
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+
+bool isValid(char* s) {
+    int leftCount = 0;
+    int starCount = 0;
+    int n = strlen(s);
+
+    for (int i = 0; i < n; i++) {
+        if (s[i] == '(') {
+            leftCount++;
+        } else if (s[i] == ')') {
+            if (leftCount > 0) {
+                leftCount--;
+            } else if (starCount > 0) {
+                starCount--;
+            } else {
+                return false;
+            }
+        } else if (s[i] == '*') {
+            starCount++;
+        }
+    }
+
+    leftCount = 0;
+    starCount = 0;
+
+    for (int i = n - 1; i >= 0; i--) {
+        if (s[i] == ')') {
+            leftCount++;
+        } else if (s[i] == '(') {
+            if (leftCount > 0) {
+                leftCount--;
+            } else if (starCount > 0) {
+                starCount--;
+            } else {
+                return false;
+            }
+        } else if (s[i] == '*') {
+            starCount++;
+        }
+    }
+
+    return true;
+}
+
+int main() {
+    char s[10005];
+    printf("Enter the string: ");
+    scanf("%s", s);
+
+    if (isValid(s)) {
+        printf("true\n");
+    } else {
+        printf("false\n");
+    }
+
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+
+Set-3 quest-5
+
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+
+#define MAX 100
+
+char stack[MAX];
+int top = -1;
+
+void push(char c) {
+    if (top < MAX - 1) {
+        stack[++top] = c;
+    }
+}
+
+char pop() {
+    if (top >= 0) {
+        return stack[top--];
+    }
+    return '\0';
+}
+
+char peek() {
+    if (top >= 0) {
+        return stack[top];
+    }
+    return '\0';
+}
+
+bool isEmpty() {
+    return top == -1;
+}
+
+bool isValid(char* s) {
+    int n = strlen(s);
+    for (int i = 0; i < n; i++) {
+        if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
+            push(s[i]);
+        } else {
+            char topChar = peek();
+            if ((s[i] == ')' && topChar == '(') ||
+                (s[i] == ']' && topChar == '[') ||
+                (s[i] == '}' && topChar == '{')) {
+                pop();
+            } else {
+                return false;
+            }
+        }
+    }
+    return isEmpty();
+}
+
+int main() {
+    char s[MAX];
+    printf("Enter the string: ");
+    scanf("%s", s);
+
+    if (isValid(s)) {
+        printf("true\n");
+    } else {
+        printf("false\n");
+    }
+
+    return 0;
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+Set-3 quest-6
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+bool isPalindrome(char* s, int len) {
+    for (int i = 0; i < len / 2; i++) {
+        if (s[i] != s[len - i - 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void shiftTailToHead(char* s, int len) {
+    char temp = s[len - 1];
+    for (int i = len - 1; i > 0; i--) {
+        s[i] = s[i - 1];
+    }
+    s[0] = temp;
+}
+
+int minShiftsToPalindrome(char* s) {
+    int len = strlen(s);
+    for (int i = 0; i < len; i++) {
+        if (isPalindrome(s, len)) {
+            return i;
+        }
+        shiftTailToHead(s, len);
+    }
+    return -1;
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        char s[10005];
+        scanf("%s", s);
+        printf("%d\n", minShiftsToPalindrome(s));
+    }
+    return 0;
+}
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+
+Set-3 quest-7
+
+
+
+#include <stdio.h>
+#include <string.h>
+
+int countVowels(const char* word) {
+    int count = 0;
+    while (*word) {
+        if (*word == 'a' || *word == 'e' || *word == 'i' || *word == 'o' || *word == 'u') {
+            count++;
+        }
+        word++;
+    }
+    return count;
+}
+
+int numberToVowels(int num) {
+    switch (num) {
+        case 1: return countVowels("one");
+        case 2: return countVowels("two");
+        case 3: return countVowels("three");
+        case 4: return countVowels("four");
+        case 5: return countVowels("five");
+        case 6: return countVowels("six");
+        case 7: return countVowels("seven");
+        case 8: return countVowels("eight");
+        case 9: return countVowels("nine");
+        case 10: return countVowels("ten");
+        case 11: return countVowels("eleven");
+        case 12: return countVowels("twelve");
+        case 13: return countVowels("thirteen");
+        case 14: return countVowels("fourteen");
+        case 15: return countVowels("fifteen");
+        case 16: return countVowels("sixteen");
+        case 17: return countVowels("seventeen");
+        case 18: return countVowels("eighteen");
+        case 19: return countVowels("nineteen");
+        case 20: return countVowels("twenty");
+        case 30: return countVowels("thirty");
+        case 40: return countVowels("forty");
+        case 50: return countVowels("fifty");
+        case 60: return countVowels("sixty");
+        case 70: return countVowels("seventy");
+        case 80: return countVowels("eighty");
+        case 90: return countVowels("ninety");
+        case 100: return countVowels("hundred");
+        default: {
+            if (num < 100) {
+                int tens = (num / 10) * 10;
+                int ones = num % 10;
+                return numberToVowels(tens) + numberToVowels(ones);
+            }
+        }
+    }
+    return 0;
+}
+
+void numberToWord(int num, char* word) {
+    char* words[] = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+                      "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen",
+                      "twenty", "greater 100" };
+    if (num > 100) {
+        strcpy(word, words[21]);
+    } else {
+        strcpy(word, words[num]);
+    }
+}
+
+int main() {
+    int n, arr[100], totalVowels = 0, countPairs = 0;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+        totalVowels += numberToVowels(arr[i]);
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (arr[i] + arr[j] == totalVowels) {
+                countPairs++;
+            }
+        }
+    }
+
+    char result[20];
+    numberToWord(countPairs, result);
+    printf("%s\n", result);
+
+    return 0;
+}
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+set-3 quest-8
+
+// Online C compiler to run C program online
+#include <stdio.h>
+
+void sum(int coins[],int count,int N,int s,int temp,int n){
+     
+    
+    
+    for(int i=1;i<=N-1;i++)
+    {
+        for(int j=1;j<N-1;j++)
+        {
+       
+          s=s+coins[i];
+          if(s+1==N){
+            count=count+1;
+          }
+        }
+       s=0;
+     
+       for(int q=0;q<=N-1;q++){
+          temp=coins[i];
+          temp=temp+coins[q];
+          if(temp+1==N){
+             count=count+1;
+          }
+          
+       }
+       temp=0;
+       
+    }
+    if(n==1){
+        if(coins[0]==N){
+            count++;
+        }
+    }
+  printf("%d",count);
+}
+
+int main() {
+    int N;
+    int count=0;
+     int s=0;
+     int temp=0;
+     int n;
+    
+    printf("Enter the value of N:");
+    scanf("%d",&N);
+    
+     printf("Enter the value of coins size:");
+    scanf("%d",&n);
+    
+      int coins[n];
+        for(int i=0;i<=n-1;i++)
+    {
+        printf("Enter the value of coins :");
+       scanf("%d",&coins[i]);
+    }
+      
+      sum(coins,count,N,s,temp,n);
+  
+    return 0;
+}
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+
+Set-3 quest-10
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+int minProduct(int arr[], int n, int k) {
+    qsort(arr, n, sizeof(int), compare);
+    int product = 1;
+    for (int i = 0; i < k; i++) {
+        product *= arr[i];
+    }
+    return product;
+}
+
+int main() {
+    int n, k;
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+    
+    int arr[n];
+    printf("Enter the elements: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter the value of k: ");
+    scanf("%d", &k);
+
+    int result = minProduct(arr, n, k);
+    printf("The minimum product of %d integers is: %d\n", k, result);
+
+    return 0;
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Set-3 quest-11
+
+
+#include <stdio.h>
+#include <string.h>
+
+int canFormPalindrome(char* str) {
+    int freq[26] = {0};
+    
+    for (int i = 0; str[i] != '\0'; i++) {
+        freq[str[i] - 'a']++;
+    }
+    
+    int oddCount = 0;
+    for (int i = 0; i < 26; i++) {
+        if (freq[i] % 2 != 0) {
+            oddCount++;
+        }
+    }
+    
+    if (oddCount > 1) {
+        return 0;
+    }
+    return 1;
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    
+    for (int i = 0; i < t; i++) {
+        char str[10001];
+        scanf("%s", str);
+        
+        if (canFormPalindrome(str)) {
+            printf("Yes\n");
+        } else {
+            printf("No\n");
+        }
+    }
+    
+    return 0;
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+Set-3 quest-12
+
+
+
+#include <stdio.h>
+#include <stdbool.h>
+
+int sumOfSquaresOfDigits(int n) {
+    int sum = 0;
+    while (n > 0) {
+        int digit = n % 10;
+        sum += digit * digit;
+        n /= 10;
+    }
+    return sum;
+}
+
+bool isHappy(int n) {
+    int slow = n, fast = n;
+    
+    while (fast != 1 && sumOfSquaresOfDigits(fast) != 1) {
+        slow = sumOfSquaresOfDigits(slow);
+        fast = sumOfSquaresOfDigits(sumOfSquaresOfDigits(fast));
+        
+        if (slow == fast) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    int n;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    
+    if (isHappy(n)) {
+        printf("True\n");
+    } else {
+        printf("False\n");
+    }
+    
+    return 0;
+}
