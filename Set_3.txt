@@ -466,7 +466,7 @@ int main() {
 
 set-3 quest-8
 
-// Online C compiler to run C program online
+
 #include <stdio.h>
 
 void sum(int coins[],int count,int N,int s,int temp,int n){
